@@ -1,21 +1,39 @@
+/* --------- IMPORTS ----------- */
+
 // import {Component} from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, ChangeEvent } from 'react';
 
 import CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component';
+
+import { getData } from './utils/data.utils';
 import './App.css';
+
+/* --------- TYPES ----------- */
+
+// here we are setting up a generic that we are passing as a type to the data we're getting back from
+// an async API call to get the users data
+export type Monster = {
+  id: string;
+  name: string;
+  email: string;
+}
+
+/* --------- COMPONENTS ----------- */
 
 const App = () => {
   
   const [searchField, setSearchField] = useState(''); //array de-structuring [value, setValue]
-  const [monsters, setMonsters] = useState([]);
+  const [monsters, setMonsters] = useState<Monster[]>([]);
   const [filteredMonsters, setFilterMonsters] = useState(monsters);
 
   useEffect(() => {
-     fetch('https://jsonplaceholder.typicode.com/users')
-    .then((response) => response.json())
-    .then((users) => setMonsters(users));  
-  }, []);
+      const fetchUsers = async () => {
+        const users = await getData<Monster[]>('https://jsonplaceholder.typicode.com/users');
+        setMonsters(users);
+      };
+      fetchUsers();
+    }, []);
 
   useEffect(() => {
     const newFilteredMonsters = monsters.filter((monster) => {
@@ -24,7 +42,8 @@ const App = () => {
       setFilterMonsters(newFilteredMonsters);
   }, [monsters, searchField]);
 
-  const onSearchChange = (event) => {
+  // there are no explicit returns from this function, this means that the return type is 'void'
+  const onSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const searchFieldValue = event.target.value.toLocaleLowerCase();
         setSearchField(searchFieldValue);
         }
@@ -41,6 +60,8 @@ const App = () => {
     </div>
   )
 }
+
+export default App;
 
 // class App extends Component {
 //   constructor() {
@@ -96,4 +117,4 @@ const App = () => {
 //   } 
 // }
 
-export default App;
+

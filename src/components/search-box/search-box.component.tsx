@@ -30,6 +30,10 @@ const SearchBox = (props: SearchBoxProps) => {
   );    
 }  
 
+export default SearchBox;
+
+/* --------- CLASS VERSION OF THE COMPONENT ----------- */
+
 // class SearchBox extends Component {
 //     render() {
 //         return (
@@ -43,7 +47,8 @@ const SearchBox = (props: SearchBoxProps) => {
 //     }
 // }
 
-export default SearchBox;
+
+/* --------- TYPE SCRIPTS TYPE EXAMPLES ----------- */
 
 /*
 // this example variable name is only allowed to hold a type 'string',

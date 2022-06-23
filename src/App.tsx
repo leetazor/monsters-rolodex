@@ -11,7 +11,7 @@ import './App.css';
 
 /* --------- TYPES ----------- */
 
-// here we are setting up a generic that we are passing as a type to the data we're getting back from
+// here we are setting up a Generic (type) that we are passing as a type to the data we're getting back from
 // an async API call to get the users data
 export type Monster = {
   id: string;
@@ -24,6 +24,7 @@ export type Monster = {
 const App = () => {
   
   const [searchField, setSearchField] = useState(''); //array de-structuring [value, setValue]
+  // the type Monster[] is essentially saying that it's an array of Monster types - which we outlined above
   const [monsters, setMonsters] = useState<Monster[]>([]);
   const [filteredMonsters, setFilterMonsters] = useState(monsters);
 
@@ -62,6 +63,8 @@ const App = () => {
 }
 
 export default App;
+
+/* --------- CLASS VERSION OF THE COMPONENT ----------- */
 
 // class App extends Component {
 //   constructor() {

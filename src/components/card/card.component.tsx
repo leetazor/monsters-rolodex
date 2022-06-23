@@ -1,8 +1,19 @@
+/* --------- IMPORTS ----------- */
+
 //import { Component } from 'react';
+
+import { Monster } from '../../App';
 import './card.styles.css';
 
+/* --------- TYPES ----------- */
 
-const Card = ({monster}) => {
+type CardProps = {
+  monster: Monster;
+}
+
+/* --------- COMPONENTS ----------- */
+
+const Card = ({monster}: CardProps) => {
     //de-structuring, so we could use just ('name', 'email' and id') instead of ('monster.name', 'monster.email', 'monster.id')
     const { name, email, id } = monster;
     return (
@@ -14,7 +25,9 @@ const Card = ({monster}) => {
     );
 }
 
+export default Card;
 
+/* --------- CLASS VERSION OF THE COMPONENT ----------- */
 
 // class Card extends Component {
 //     render() {
@@ -29,5 +42,3 @@ const Card = ({monster}) => {
 //         )
 //     }
 // }
-
-    export default Card;
